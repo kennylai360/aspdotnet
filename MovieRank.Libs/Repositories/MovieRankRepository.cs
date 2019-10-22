@@ -43,5 +43,10 @@ namespace MovieRank.Libs.Repositories
         {
             await _context.SaveAsync(movieDb);
         }
+
+        public async Task UpdateMovie(MovieDb request)
+        {
+            await _context.SaveAsync(request);
+        }
     }
 }

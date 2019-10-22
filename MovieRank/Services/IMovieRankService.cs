@@ -13,5 +13,7 @@ namespace MovieRank.Services
         Task<IEnumerable<MovieResponse>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName);
 
         Task AddMovie(int userId, MovieRankRequest movieRankRequest);
+
+        Task UpdateMovie(int userId, MovieUpdateRequest movieUpdateRequest);
     }
 }

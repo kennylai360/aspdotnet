@@ -23,5 +23,14 @@ namespace MovieRank.Controllers
 
             return results;
         }
+
+        [HttpGet]
+        [Route("{userId}/{movieName}")]
+        public async Task<MovieResponse> GetMovie(int userId, string movieName)
+        {
+            var result = await _movieRankService.GetMovie(userId, movieName);
+
+            return result;
+        }
     }
 }

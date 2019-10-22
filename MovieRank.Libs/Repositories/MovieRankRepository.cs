@@ -19,5 +19,10 @@ namespace MovieRank.Libs.Repositories
         {
             return await _context.ScanAsync<MovieDb>(new List<ScanCondition>()).GetRemainingAsync();
         }
+
+        public async Task<MovieDb> GetMovie(int userId, string movieName)
+        {
+            return await _context.LoadAsync<MovieDb>(userId, movieName);
+        }
     }
 }

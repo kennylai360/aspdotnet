@@ -1,5 +1,6 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.DocumentModel;
 using MovieRank.Libs.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,6 +24,19 @@ namespace MovieRank.Libs.Repositories
         public async Task<MovieDb> GetMovie(int userId, string movieName)
         {
             return await _context.LoadAsync<MovieDb>(userId, movieName);
+        }
+
+        public async Task<IEnumerable<MovieDb>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName)
+        {
+            var config = new DynamoDBOperationConfig
+            {
+                QueryFilter = new List<ScanCondition>
+                {
+                    new ScanCondition("MovieName", Amazon.DynamoDBv2.DocumentModel.ScanOperator.BeginsWith, movieName)
+                }
+            };
+
+            return await _context.QueryAsync<MovieDb>(userId, config).GetRemainingAsync();
         }
     }
 }

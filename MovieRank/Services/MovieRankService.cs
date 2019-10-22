@@ -39,5 +39,12 @@ namespace MovieRank.Services
 
             return _map.ToMovieContract(response);
         }
+
+        public async Task AddMovie(int userId, MovieRankRequest movieRankRequest)
+        {
+            var movieDb = _map.ToMovieDbModel(userId, movieRankRequest);
+
+            await _movieRankRepository.AddMovie(movieDb);
+        }
     }
 }

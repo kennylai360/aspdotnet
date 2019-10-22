@@ -11,5 +11,7 @@ namespace MovieRank.Libs.Repositories
         Task<MovieDb> GetMovie(int userId, string movieName);
 
         Task<IEnumerable<MovieDb>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName);
+
+        Task AddMovie(MovieDb movieDb);
     };
 }

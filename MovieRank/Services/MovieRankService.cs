@@ -55,5 +55,18 @@ namespace MovieRank.Services
 
             await _movieRankRepository.UpdateMovie(movieDb);
         }
+
+        public async Task<MovieRankResponse> GetMovieRank(string movieName)
+        {
+            var response = await _movieRankRepository.GetMovieRank(movieName);
+
+            var overallMovieRanking = Math.Round(response.Select(x => x.Ranking).Average());
+
+            return new MovieRankResponse
+            {
+                MovieName = movieName,
+                OverallRanking = overallMovieRanking
+            };
+        }
     }
 }
